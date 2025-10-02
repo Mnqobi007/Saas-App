@@ -1,11 +1,12 @@
 import React from "react";
-import { useUser, useClerk } from "@clerk/clerk-react";
+import { useUser, useClerk, Protect } from "@clerk/clerk-react";
 import {
   Eraser,
   FileText,
   Hash,
   House,
   Image,
+  LogOut,
   Scissors,
   SquarePen,
   Users,
@@ -62,6 +63,22 @@ const Sidebar = ({ sidebar, setSidebar }) => {
           ))}
         </div>
       </div>
+
+
+          <div className="w-full border-t border-gray-200 p-4 px-7 flex items-center justify-between">
+            <div className="flex gap-2 items-center cursor-pointer" onClick={openUserProfile}>
+              <img src={user.imageUrl} alt="profile-image" className="w-8 rounded-full"/>
+              <div>
+                <h1 className="font-medium text-sm">{user.fullName}</h1>
+                <p className="text-xs text-gray-500">
+                  <Protect plan='premium' fallback='free'>Premium</Protect>
+                </p>
+              </div>
+            </div>
+            <LogOut onClick={signOut} className="w-4.5 text-gray-400 hover:text-gray-700 transition cursor-pointer"/>
+          </div>
+
+
     </div>
   );
 };
